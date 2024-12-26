@@ -12,16 +12,23 @@ class FoodScraper:
 
         try:
             self.fetch_page(url)
+            self.get_name()
+            self.get_ingredients()
+            self.get_time()
+            self.get_instructions()
         except requests.exceptions.RequestException as e:
             print(f"Error fetching the page: {e}")
-            return
+            return None
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
 
-        self.get_name()
-        self.get_ingredients()
-        self.get_time()
-        self.get_instructions()
+        return self.recipe
 
     def fetch_page(self, url):
+        if ("www.foodnetwork.com/recipes/" not in url):
+            raise ValueError("Not valid FoodNetwork Url!") 
+
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:124.0) Gecko/20100101 Firefox/124.0'}
         response = requests.get(url, headers=headers, timeout=5)
 
@@ -39,7 +46,6 @@ class FoodScraper:
             if ingredient == "Deselect All":
                 continue
             self.recipe.ingredients.append(ingredient)
-
 
     def get_time(self):
         time_html = self.soup.find(class_='o-RecipeInfo__m-Time')
