@@ -5,4 +5,5 @@ This command-line interface (CLI) tool allows you to easily scrape recipes from 
 ## Features
 *    Scrape recipes from supported website URLs (FoodNetwork).
 *    Read recipes from a CSV file.
-*    Save the scraped recipes in a well-structured JSON file.
+*    Save the scraped recipes in a well-structured JSON file and/or SQLITE database.
+*    Retrieve random recipe from SQLITE database.

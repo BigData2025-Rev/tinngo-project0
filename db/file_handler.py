@@ -13,7 +13,7 @@ class FileHandler:
     def save_json(self, recipe):
         with open(self.save_file, 'a', encoding='utf-8') as f:
             json.dump(asdict(recipe), f, indent=4)
-            print("Saved recipe!")
+            print("Saved to Json!")
 
     def is_csv(self, file_path):
         return os.path.isfile(file_path) and file_path.lower().endswith('.csv')
